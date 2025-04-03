@@ -17,6 +17,30 @@ const upload = multer({
   storage: storage,
 }).single("profileImage");
 
+const signup = async (req, res) => {
+  
+  try {
+   
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+    req.body.password = hashedPassword;
+    const createdUser = await userModel.create(req.body);
+    await mailUtil.sendingMail(createdUser.email,"welcome to Trackflow","this is welcome mail")
+    
+
+    res.status(201).json({
+      message: "user created..",
+      data: createdUser,
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({
+      message: "error",
+      data: err,
+    });
+  }
+};
+
 const loginUser = async (req, res) => {
   
   const email = req.body.email;
@@ -24,7 +48,7 @@ const loginUser = async (req, res) => {
  
 
  
-  const foundUserFromEmail = await userModel.findOne({ email: email }).populate("roleId");
+  const foundUserFromEmail = await userModel.findOne({ email: email }).populate("role");
   console.log(foundUserFromEmail);
   
   if (foundUserFromEmail != null) {
@@ -48,6 +72,7 @@ const loginUser = async (req, res) => {
   }
 };
 
+//--------->> addUserWithProfileImage----
 const addUserWithProfileImage = async (req, res) => {
   upload(req, res, async (err) => {
     if (err) {
@@ -80,29 +105,6 @@ const addUserWithProfileImage = async (req, res) => {
 };
 
 
-const signup = async (req, res) => {
-  
-  try {
-   
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(req.body.password, salt);
-    req.body.password = hashedPassword;
-    const createdUser = await userModel.create(req.body);
-    await mailUtil.sendingMail(createdUser.email,"welcome to budgetbuddy","this is welcome mail")
-    
-
-    res.status(201).json({
-      message: "user created..",
-      data: createdUser,
-    });
-  } catch (err) {
-    console.log(err)
-    res.status(500).json({
-      message: "error",
-      data: err,
-    });
-  }
-};
 
 
 const getAllUsers = async (req, res) => {

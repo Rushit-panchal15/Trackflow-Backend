@@ -4,11 +4,11 @@ const reportController = require("../controllers/ReportController");
 // Get all reports
 routes.get("/reports", reportController.getAllReports);
 
-//Get reports by userid
-routes.get("/reports/user/:userId", reportController.getReportByUserId);
+
+routes.get("/reports/user/:userId", reportController.getAllModelReports);
 
 // Get report by ID
-routes.get("/reports/:id", reportController.getReportById);
+// routes.get("/reports/:id", reportController.getReportById);
 
 // Add new report
 routes.post("/reports", reportController.addReport);
@@ -18,5 +18,7 @@ routes.put("/reports/:id", reportController.updateReport);
 
 // Delete report
 routes.delete("/reports/:id", reportController.deleteReport);
+
+routes.get("/allreports",reportController.getAllModelReports);
 
 module.exports = routes;

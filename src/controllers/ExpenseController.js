@@ -3,7 +3,11 @@ const expenseModel = require("../models/ExpenseModel");
 // Create Expense Entry
 const addExpense = async (req, res) => {
   try {
-    const createdExpense = await expenseModel.create(req.body);
+    const { userId } = req.params; // Extract userId from URL
+    const expenseData = { ...req.body, userId }; // Add userId to expense data
+
+    const createdExpense = await expenseModel.create(expenseData);
+
     res.status(201).json({
       message: "Expense added successfully",
       data: createdExpense,
@@ -11,7 +15,7 @@ const addExpense = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: "Error adding expense",
-      error: err,
+      error: err.message,
     });
   }
 };

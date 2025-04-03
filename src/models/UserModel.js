@@ -13,13 +13,9 @@ const userSchema = new Schema({
         type:Number
     },
     status:{
-        tpye:Boolean
+        type:Boolean
     },
-    roleId:{
-        type:Schema.Types.ObjectId, //batugasoijkadsasiksaj
-        ref:"roles"
-
-    },
+    
     password:{
         type:String,
     },
@@ -27,9 +23,7 @@ const userSchema = new Schema({
         type:String,
         unique:true
     },
-    role:{
-        type:String
-    },
+    role: { type: String, enum: [ "user"], required: true },
     profileImage:{
         type: String,
         // required: true

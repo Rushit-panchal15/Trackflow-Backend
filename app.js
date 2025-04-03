@@ -38,7 +38,7 @@ const adminRoutes= require("./src/routes/AdminRoutes");
 app.use(adminRoutes)
 
 
-mongoose.connect("mongodb://localhost:27017/25_node_internship").then(()=>{
+mongoose.connect("mongodb://localhost:27017/trackflow").then(()=>{
     console.log("database connected....")
 })
 

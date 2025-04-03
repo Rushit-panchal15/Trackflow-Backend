@@ -11,7 +11,7 @@ routes.get("/expense/:id", expenseController.getExpenseById);
 routes.get("/expense/user/:userId", expenseController.getExpenseByUserId);
 
 // Add new expense
-routes.post("/expense", expenseController.addExpense);
+routes.post("/expense/:userId", expenseController.addExpense);
 
 // Update expense
 routes.put("/expense/:id", expenseController.updateExpense);
