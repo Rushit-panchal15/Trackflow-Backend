@@ -12,7 +12,7 @@ const adminLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const admin = await adminModel.findOne({ email });
+    const admin = await userModel.findOne({ email });
     if (!admin) {
       return res.status(404).json({ message: "Admin not found" });
     }

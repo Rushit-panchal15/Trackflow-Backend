@@ -22,23 +22,23 @@ const adminSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["Super Admin", "Admin"], // Different levels of admins
-      default: "Admin",
+      enum: [ "admin"], // Different levels of admins
+      default: "admin",
     },
     status: {
       type: Boolean,
       default: true, // Active by default, can be disabled by another admin
     },
-    profileImage: {
-      type: String, // URL for profile image
-    },
-    permissions: {
-      manageUsers: { type: Boolean, default: true },
-      viewReports: { type: Boolean, default: true },
-      manageTransactions: { type: Boolean, default: false },
-      manageFinancialGoals: { type: Boolean, default: false },
-      sendNotifications: { type: Boolean, default: false },
-    },
+    // profileImage: {
+    //   type: String, // URL for profile image
+    // },
+    // permissions: {
+    //   manageUsers: { type: Boolean, default: true },
+    //   viewReports: { type: Boolean, default: true },
+    //   manageTransactions: { type: Boolean, default: false },
+    //   manageFinancialGoals: { type: Boolean, default: false },
+    //   sendNotifications: { type: Boolean, default: false },
+    // },
   },
   {
     timestamps: true, // Automatically create 'createdAt' and 'updatedAt'
